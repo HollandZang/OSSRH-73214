@@ -34,9 +34,7 @@ public class DefaultZnHttpConf implements ZnHttpConf {
                 .addHeader("Connection", "keep-alive")
                 .addHeader("Accept", "*/*");
         if (headers != null) {
-            for (Map.Entry<String, String> entry : headers.entrySet()) {
-                builder.addHeader(entry.getKey(), entry.getValue());
-            }
+            headers.forEach(builder::addHeader);
         }
         return builder;
     }
