@@ -1,4 +1,4 @@
-package com.holland.http;
+package com.holland.http.conf;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
