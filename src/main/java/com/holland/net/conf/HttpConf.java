@@ -1,4 +1,4 @@
-package com.holland.http.conf;
+package com.holland.net.conf;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -8,7 +8,7 @@ import java.util.Map;
 /**
  * This is a configuration class
  */
-public interface ZnHttpConf {
+public interface HttpConf {
 
     /**
      * Inject your OkHttpClient
@@ -18,7 +18,7 @@ public interface ZnHttpConf {
     /**
      * Set the global request config
      */
-    Request.Builder myRequest(Map<String, String> headers);
+    Request.Builder getRequest(Map<String, ?> headers);
 
     /**
      * Print the error message, when the request failed

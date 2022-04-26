@@ -1,13 +1,12 @@
-package com.holland.http.demo;
+package com.holland.net.demo;
 
-import com.holland.http.ZnHttp;
+import com.holland.net.Net;
+import com.holland.net.common.PairBuilder;
 
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.HashMap;
-import java.util.Map;
 
 public class AsyncDemo {
 
@@ -21,12 +20,12 @@ public class AsyncDemo {
     }
 
     public static void getDemo() {
-        final Map<String, Object> data = new HashMap<>();
-        data.put("t1", LocalDateTime.now());
-        data.put("t2", LocalTime.now());
-        data.put("t3", LocalDate.now());
+        final PairBuilder data = new PairBuilder()
+                .add("t1", LocalDateTime.now())
+                .add("t2", LocalTime.now())
+                .add("t3", LocalDate.now());
 
-        new ZnHttp().async.get("http://www.baidu.com", null, data, response -> {
+        new Net().async.get("http://www.baidu.com", data, data, response -> {
             try {
                 System.out.println("getDemo::\n" + response.body().string());
             } catch (IOException e) {
@@ -36,12 +35,12 @@ public class AsyncDemo {
     }
 
     public static void postFormDemo() {
-        final Map<String, Object> data = new HashMap<>();
-        data.put("t1", LocalDateTime.now());
-        data.put("t2", LocalTime.now());
-        data.put("t3", LocalDate.now());
+        final PairBuilder data = new PairBuilder()
+                .add("t1", LocalDateTime.now())
+                .add("t2", LocalTime.now())
+                .add("t3", LocalDate.now());
 
-        new ZnHttp().async.get("http://www.baidu.com", null, data, response -> {
+        new Net().async.postForm("http://www.baidu.com", data, data, response -> {
             try {
                 System.out.println("postFormDemo::\n" + response.body().string());
             } catch (IOException e) {
@@ -51,12 +50,12 @@ public class AsyncDemo {
     }
 
     public static void postJsonDemo() {
-        final Map<String, Object> data = new HashMap<>();
-        data.put("t1", LocalDateTime.now());
-        data.put("t2", LocalTime.now());
-        data.put("t3", LocalDate.now());
+        final PairBuilder data = new PairBuilder()
+                .add("t1", LocalDateTime.now())
+                .add("t2", LocalTime.now())
+                .add("t3", LocalDate.now());
 
-        new ZnHttp().async.get("http://www.baidu.com", null, data, response -> {
+        new Net().async.postJson("http://www.baidu.com", data, data, response -> {
             try {
                 System.out.println("postJsonDemo::\n" + response.body().string());
             } catch (IOException e) {

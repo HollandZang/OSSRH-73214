@@ -1,4 +1,4 @@
-package com.holland.http.conf;
+package com.holland.net.conf;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -17,7 +17,7 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
-public class DefaultZnHttpConf implements ZnHttpConf {
+public class DefaultHttpConf implements HttpConf {
 
     @Override
     public OkHttpClient getClient() {
@@ -29,12 +29,12 @@ public class DefaultZnHttpConf implements ZnHttpConf {
     }
 
     @Override
-    public final Request.Builder myRequest(Map<String, String> headers) {
+    public final Request.Builder getRequest(Map<String, ?> headers) {
         Request.Builder builder = new Request.Builder()
                 .addHeader("Connection", "keep-alive")
                 .addHeader("Accept", "*/*");
         if (headers != null) {
-            headers.forEach(builder::addHeader);
+            headers.forEach((name, value) -> builder.addHeader(name, value == null ? "" : value.toString()));
         }
         return builder;
     }
