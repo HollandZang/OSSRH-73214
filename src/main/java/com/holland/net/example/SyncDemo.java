@@ -1,4 +1,4 @@
-package com.holland.net.demo;
+package com.holland.net.example;
 
 import com.holland.net.Net;
 import com.holland.net.common.PairBuilder;

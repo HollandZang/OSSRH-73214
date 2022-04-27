@@ -132,39 +132,4 @@ public class JsonRpc2 {
                     });
         }
     }
-
-    @SuppressWarnings("AlibabaLowerCamelCaseVariableNaming")
-    public static void main(String[] args) throws InterruptedException {
-        Thread.setDefaultUncaughtExceptionHandler((t, e) -> {
-            e.printStackTrace();
-            System.exit(0);
-        });
-
-        final JsonRpc2 NET = new JsonRpc2("https://eth-mainnet.alchemyapi.io/v2/demo");
-
-        NET.async.send(r -> {
-                    final Response<?> eth_blockNumber = r.get(0);
-                    final Response<?> eth_getBlockByNumber = r.get(1);
-
-                    if (eth_blockNumber.failed())
-                        throw new RuntimeException("eth_blockNumber.failed()");
-                    if (eth_getBlockByNumber.failed())
-                        throw new RuntimeException("eth_getBlockByNumber.failed()");
-
-                    final String r0 = eth_blockNumber.getResult();
-                    final Map<String, ?> r1 = eth_getBlockByNumber.getResult();
-
-                    System.out.println("r0 => " + r0);
-                    System.out.println("r1 => " + r1);
-
-                    System.exit(0);
-                }
-                , new Request("eth_blockNumber")
-                , new Request("eth_getBlockByNumber"
-                        , new Object[]{"0xdfaff9", false})
-        );
-
-        Thread.sleep(10000);
-        System.exit(0);
-    }
 }
