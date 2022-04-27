@@ -6,10 +6,7 @@ import com.holland.net.conf.DefaultHttpConf;
 import com.holland.net.conf.HttpConf;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.function.Consumer;
 
 public class JsonRpc2 {
@@ -94,7 +91,7 @@ public class JsonRpc2 {
 
                         final String s;
                         try {
-                            s = response.body().string();
+                            s = Objects.requireNonNull(response.body()).string();
                         } catch (IOException e) {
                             throw new RuntimeException(e);
                         }
@@ -120,7 +117,7 @@ public class JsonRpc2 {
 
                         final String s;
                         try {
-                            s = response.body().string();
+                            s = Objects.requireNonNull(response.body()).string();
                         } catch (IOException e) {
                             throw new RuntimeException(e);
                         }

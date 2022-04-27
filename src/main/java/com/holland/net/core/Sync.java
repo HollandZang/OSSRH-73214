@@ -5,6 +5,7 @@ import com.holland.net.conf.HttpConf;
 import okhttp3.*;
 
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 
 import static com.holland.net.common.CommonUtil.MEDIA_TYPE_JSON;
@@ -17,7 +18,7 @@ public class Sync {
     }
 
     public Optional<String> get(String url, Map<String, ?> headers, Map<String, ?> data) {
-        final HttpUrl.Builder urlBuilder = HttpUrl.parse(url).newBuilder();
+        final HttpUrl.Builder urlBuilder = Objects.requireNonNull(HttpUrl.parse(url)).newBuilder();
         CommonUtil.setEncodeQueryParam(data, urlBuilder::addEncodedQueryParameter, httpConf);
 
         final Request request = httpConf.getRequest(headers)
@@ -59,7 +60,7 @@ public class Sync {
     private Optional<String> getOptionalString(String url, Object data, Request request) {
         try {
             final Response execute = httpConf.getClient().newCall(request).execute();
-            final String string = execute.body().string();
+            final String string = Objects.requireNonNull(execute.body()).string();
             return Optional.of(string);
         } catch (Exception e) {
             httpConf.printError("request error: {}\nheaders: {}\ndata: {}", url, request.headers(), data, e);

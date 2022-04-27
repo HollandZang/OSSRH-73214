@@ -3,9 +3,12 @@ package com.holland.net.core;
 import com.holland.net.common.CommonUtil;
 import com.holland.net.conf.HttpConf;
 import okhttp3.*;
+import org.jetbrains.annotations.NotNull;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Map;
+import java.util.Objects;
 import java.util.function.Consumer;
 
 import static com.holland.net.common.CommonUtil.MEDIA_TYPE_JSON;
@@ -18,7 +21,7 @@ public class Async {
     }
 
     public void get(String url, Map<String, ?> headers, Map<String, ?> data, Consumer<Response> onResponse) {
-        final HttpUrl.Builder urlBuilder = HttpUrl.parse(url).newBuilder();
+        final HttpUrl.Builder urlBuilder = Objects.requireNonNull(HttpUrl.parse(url)).newBuilder();
         CommonUtil.setEncodeQueryParam(data, urlBuilder::addEncodedQueryParameter, httpConf);
 
         final Request request = httpConf.getRequest(headers)
@@ -60,7 +63,7 @@ public class Async {
     private void doCallback(String url, Object data, Request request, Consumer<Response> onResponse) {
         httpConf.getClient().newCall(request).enqueue(new Callback() {
             @Override
-            public void onFailure(Call call, IOException e) {
+            public void onFailure(Call call, @NotNull IOException e) {
                 httpConf.printError("request error: {}\nheaders: {}\ndata: {}", url, request.headers(), data, e);
             }
 
