@@ -47,7 +47,11 @@ public class JsonRpc2Demo {
 
                     System.exit(0);
                 }
-                , new Request("eth_blockNumber")
+                , new Request(1,"eth_blockNumber")
+                , new Request(2,"eth_blockNumber")
+                , new Request(3,"eth_blockNumber")
+                , new Request(4,"eth_blockNumber")
+                , new Request(5,"eth_blockNumber")
                 , new Request("eth_getBlockByNumber"
                         , new Object[]{"0xdfaff9", false})
         );

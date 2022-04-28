@@ -19,6 +19,12 @@ public class Request {
         this.params = params;
     }
 
+    public Request(int id, String method) {
+        this.id = String.valueOf(id);
+        this.method = method;
+        this.params = new Object[]{};
+    }
+
     public Request(int id, String method, Object params) {
         this.id = String.valueOf(id);
         this.method = method;
