@@ -14,7 +14,7 @@ public class JsonRpc2 {
     };
 
     public final String url;
-    private final DefaultHttpConf httpConf;
+    private final HttpConf httpConf;
 
     public final Sync sync;
     public final Async async;
@@ -26,7 +26,7 @@ public class JsonRpc2 {
         this.async = new Async(httpConf);
     }
 
-    public JsonRpc2(String url, DefaultHttpConf httpConf) {
+    public JsonRpc2(String url, HttpConf httpConf) {
         this.url = url;
         this.httpConf = httpConf;
         this.sync = new Sync(httpConf);

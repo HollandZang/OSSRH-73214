@@ -22,9 +22,9 @@ public class DefaultHttpConf implements HttpConf {
     @Override
     public OkHttpClient getClient() {
         return new OkHttpClient.Builder()
-                .connectTimeout(60, TimeUnit.SECONDS)
-                .writeTimeout(60, TimeUnit.SECONDS)
-                .readTimeout(60, TimeUnit.SECONDS)
+                .connectTimeout(5, TimeUnit.SECONDS)
+                .writeTimeout(5, TimeUnit.SECONDS)
+                .readTimeout(5, TimeUnit.SECONDS)
                 .build();
     }
 
@@ -43,8 +43,9 @@ public class DefaultHttpConf implements HttpConf {
     public void printError(String s, Object... args) {
         final String format = String.format(s.replace("{}", "%s"), args);
         System.err.println(format);
-        final Exception exception = (Exception) args[args.length - 1];
-        System.err.println(Arrays.stream(exception.getStackTrace()).map(StackTraceElement::toString).collect(Collectors.joining("\n\t")));
+        final Object exception = args[args.length - 1];
+        if (exception instanceof Exception)
+            System.err.println(Arrays.stream(((Exception) exception).getStackTrace()).map(StackTraceElement::toString).collect(Collectors.joining("\n\t")));
     }
 
     @Override
