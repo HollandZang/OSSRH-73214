@@ -29,7 +29,7 @@ public class DefaultHttpConf implements HttpConf {
     }
 
     @Override
-    public final Request.Builder getRequest(Map<String, ?> headers) {
+    public Request.Builder getRequest(Map<String, ?> headers) {
         Request.Builder builder = new Request.Builder()
                 .addHeader("Connection", "keep-alive")
                 .addHeader("Accept", "*/*");
