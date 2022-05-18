@@ -2,6 +2,7 @@ package com.holland.net.example;
 
 import com.holland.net.Net;
 import com.holland.net.common.PairBuilder;
+import com.holland.net.exception.NetExceptionEnum;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -23,7 +24,9 @@ public class SyncDemo {
                 .add("t3", LocalDate.now());
 
         final Optional<String> s = new Net().sync.get("http://www.baidu.com", data, data);
-        final String s1 = s.orElse("empty!");
+        if (!s.isPresent())
+             throw NetExceptionEnum.EMPTY_BODY.e();
+        final String s1 = s.get();
         System.out.println("getDemo::\n" + s1);
     }
 
@@ -34,7 +37,9 @@ public class SyncDemo {
                 .add("t3", LocalDate.now());
 
         final Optional<String> s = new Net().sync.postForm("http://www.baidu.com", data, data);
-        final String s1 = s.orElse("empty!");
+        if (!s.isPresent())
+            throw NetExceptionEnum.EMPTY_BODY.e();
+        final String s1 = s.get();
         System.out.println("postFormDemo::\n" + s1);
     }
 
@@ -45,7 +50,9 @@ public class SyncDemo {
                 .add("t3", LocalDate.now());
 
         final Optional<String> s = new Net().sync.postJson("http://www.baidu.com", data, data);
-        final String s1 = s.orElse("empty!");
+        if (!s.isPresent())
+            throw NetExceptionEnum.EMPTY_BODY.e();
+        final String s1 = s.get();
         System.out.println("postJsonDemo::\n" + s1);
     }
 }
