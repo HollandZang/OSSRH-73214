@@ -1,7 +1,7 @@
 package com.holland.net.exception;
 
 public enum NetExceptionEnum {
-    EMPTY_BODY("EMPTY_BODY");
+    EMPTY_BODY("Response body is empty!");
 
     public final String msg;
 
